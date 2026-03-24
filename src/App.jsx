@@ -1,10 +1,18 @@
-import { useState } from 'react'
-import Header from './components/Header'
+import Navigation from "./assets/Navigation"
+import Header from "./assets/Header"
+import Footer from "./assets/Footer"
+import Testimonials from "./assets/Testimonials"
 
 function App() {
 
   return (
-    < Header />
+    <>
+  {/* {UI List} */}
+      <Navigation />
+      <Header />
+      <Testimonials />
+      <Footer />
+    </>
 
   )
 }

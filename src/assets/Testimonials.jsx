@@ -45,7 +45,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="bg-slate-950 py-16">
+    <section className="bg-slate-950 py-10 border-t border-white/10">
       <motion.div
         className="max-w-5xl mx-auto px-4 text-center"
         initial="hidden"

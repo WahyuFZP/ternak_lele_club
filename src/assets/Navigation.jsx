@@ -10,11 +10,11 @@
 
     export default function Navbar() {
     return (
-        <nav className="relative z-50 flex items-center justify-between px-6 py-4 w-full backdrop-blur-md bg-slate-950 ">
+        <nav className="relative z-50 flex items-center justify-between px-6 py-1 w-full bg-slate-950 border-b border-white/10">
 
         {/* {Logo} */}
         <div className="flex items-center justify-between px-6">
-            <span className="text-white font-bold text-lg tracking-wide">MyLogo</span>
+            <img src="src/assets/lele.png" alt="logo" className="w-25 h-15"/>
         </div>
 
         {/* LEFT: Menu */}
@@ -53,8 +53,10 @@
             </NavigationMenuList>
         </NavigationMenu>
 
-        {/* RIGHT: Login */}
-        <Button className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-xl px-5 hover:opacity-90" >Login</Button>
+                {/* RIGHT: Login */}
+                <Button className="bg-linear-to-r from-emerald-500 to-cyan-400 text-slate-950 font-medium rounded-xl px-5 py-2 hover:brightness-110">
+                    Login
+                </Button>
 
         </nav>
     )

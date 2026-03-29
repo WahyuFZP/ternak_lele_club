@@ -7,8 +7,19 @@
     NavigationMenuTrigger,
     } from "@/components/ui/navigation-menu"
     import { Button } from "@/components/ui/button"
+    import { useNavigate } from "react-router-dom"
 
     export default function Navbar() {
+        const navigate = useNavigate()
+
+        const handleHomeClick = () => {
+            navigate("/")
+        }
+
+        const handleLoginClick = () => {
+    navigate("/auth")
+  }
+
     return (
         <nav className="relative z-50 flex items-center justify-between px-6 py-1 w-full bg-slate-950 border-b border-white/10">
 
@@ -23,7 +34,10 @@
 
             {/* Home */}
             <NavigationMenuItem>
-                <NavigationMenuLink className="px-3 py-2 font-medium text-white">
+                <NavigationMenuLink 
+                className="px-3 py-2 font-medium text-white"
+                onClick={handleHomeClick}
+                >
                 Home
                 </NavigationMenuLink>
             </NavigationMenuItem>
@@ -54,7 +68,11 @@
         </NavigationMenu>
 
                 {/* RIGHT: Login */}
-                <Button className="bg-linear-to-r from-emerald-500 to-cyan-400 text-slate-950 font-medium rounded-xl px-5 py-2 hover:brightness-110">
+                <Button 
+                type="button"
+                className="bg-linear-to-r from-emerald-500 to-cyan-400 text-slate-950 font-medium rounded-xl px-5 py-2 hover:brightness-110" 
+                onClick={handleLoginClick}
+                >
                     Login
                 </Button>
 

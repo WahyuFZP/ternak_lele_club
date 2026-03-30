@@ -45,7 +45,7 @@ export default function AuthForm() {
   }
 
   return (
-    <div className="max-w-sm mx-auto rounded-2xl border border-white/10 bg-slate-900/60 p-6 shadow-lg">
+    <div className="max-w-sm mx-auto rounded-2xl border border-white/10 bg-slate-900/60 p-6 shadow-lg text-white">
       <h2 className="text-lg font-semibold text-white mb-1">
         {mode === "signin" ? "Login ke akun Anda" : "Daftar akun baru"}
       </h2>

@@ -1,8 +1,24 @@
 import { Components } from 'react';
 import { Button } from "@/components/ui/button"
+import { animate,  splitText } from 'animejs';
+
+const { chars } = splitText('h1', {
+  words: { wrap: 'clip' },
+  chars: true,
+});
+
+animate(chars, {
+  x: [
+    { to: ['0%', '100%'] },
+    { to: '100%', delay: 750, ease: 'inOut(3)' }
+  ],
+  duration: 750,
+  loop: true
+});
 
 
 function Header() {
+
   return (
   <section className="relative w-full overflow-hidden bg-slate-950 py-24">
       {/* Glow/background effect (hanya di atas heading) */}

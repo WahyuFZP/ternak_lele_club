@@ -256,6 +256,27 @@ code {
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+.typing-text {
+  font-family: var(--mono);
+  position: relative;
+  white-space: nowrap;
+}
+
+.typing-text::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 4px;
+  background: currentColor;
+  animation: typing-caret-blink 1s steps(2, start) infinite;
+}
+
+@keyframes typing-caret-blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;}

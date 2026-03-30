@@ -6,6 +6,7 @@ import Footer from "./assets/Footer"
 import Testimonials from "./assets/Testimonials"
 import AuthForm from "@/components/ui/auth/AuthForm"
 
+
 function App() {
   return (
     <Routes>

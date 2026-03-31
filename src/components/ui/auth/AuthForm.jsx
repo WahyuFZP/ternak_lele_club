@@ -1,11 +1,15 @@
 // src/components/ui/auth/AuthForm.jsx
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { useAuth } from "@/context/AuthContext"
 import { supabase } from "@/lib/supabaseClient"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 export default function AuthForm() {
+  const { login } = useAuth()
+  const navigate = useNavigate()
   const [mode, setMode] = useState("signin") // "signin" | "signup"
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -30,7 +34,11 @@ export default function AuthForm() {
       } else {
         result = await supabase.auth.signInWithPassword({ email, password })
         if (!result.error) {
+          // Set isLoggedIn state ke true di AuthContext
+          login(result.data.user)
           setMessage("Login berhasil.")
+          // Redirect ke dashboard
+          navigate("/dashboard")
         }
       }
 

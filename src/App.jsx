@@ -1,15 +1,42 @@
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, Navigate } from "react-router-dom"
 import Navigation from "./assets/Navigation"
 import Header from "./assets/Header"
 import StartSection from "./assets/StartSection"
 import Footer from "./assets/Footer"
 import Testimonials from "./assets/Testimonials"
-import AuthForm from "@/components/ui/auth/AuthForm"
+import { AuthProvider, useAuth } from "@/context/AuthContext"
+import LoginPage from "@/pages/LoginPage"
+import DashboardPage from "@/pages/DashboardPage"
 
+/**
+ * ProtectedRoute Component
+ * 
+ * Protect dashboard route - hanya bisa diakses jika user sudah login
+ * Jika belum login, redirect ke /auth
+ */
+function ProtectedRoute({ children }) {
+  const { isLoggedIn, loading } = useAuth()
 
-function App() {
+  if (loading) {
+    return <div className="flex items-center justify-center min-h-screen">Loading...</div>
+  }
+
+  if (!isLoggedIn) {
+    return <Navigate to="/auth" replace />
+  }
+
+  return children
+}
+
+/**
+ * MainApp Component
+ * 
+ * Routes utama aplikasi
+ */
+function MainApp() {
   return (
     <Routes>
+      {/* Home / Landing Page */}
       <Route
         path="/"
         element={
@@ -23,20 +50,39 @@ function App() {
         }
       />
 
+      {/* Login Page */}
       <Route
         path="/auth"
-        element={
-          <div className="min-h-screen bg-slate-950">
-            <Navigation />
-            <div className="flex items-center justify-center py-16">
-              <AuthForm />
-            </div>
-          </div>
-        }
-        
+        element={<LoginPage />}
       />
+
+      {/* Dashboard - Protected Route */}
+      <Route
+        path="/dashboard/*"
+        element={
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* 404 - Redirect ke home */}
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )
 }
 
-export default App
+/**
+ * App Component
+ * 
+ * Root component - wrap dengan AuthProvider untuk context yang global
+ */
+
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <MainApp />
+    </AuthProvider>
+  )
+}

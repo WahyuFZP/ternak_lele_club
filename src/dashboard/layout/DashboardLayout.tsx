@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar"
 import DashboardSidebar from "./Sidebar"
 import DashboardHeader from "./Header"
 
@@ -24,24 +24,28 @@ export default function DashboardLayout({
   onPageChange,
 }: DashboardLayoutProps) {
   return (
-    <SidebarProvider>
-      <div className="flex h-screen w-full">
-        {/* Sidebar */}
-        <DashboardSidebar currentPage={currentPage} onPageChange={onPageChange} />
+    // SidebarProvider membungkus seluruh dashboard dan mengatur state sidebar
+    // className="text-left" untuk menimpa text-align center global dari landing page
+    <SidebarProvider className="text-left">
+      {/* Sidebar kiri (fixed) */}
+      <DashboardSidebar
+        currentPage={currentPage}
+        onPageChange={onPageChange}
+      />
 
-        {/* Main Content Area */}
-        <div className="flex flex-1 flex-col overflow-hidden">
-          {/* Header */}
-          <DashboardHeader />
+      {/* Area konten utama mengikuti pola SidebarInset shadcn */}
+      {/* bg-slate-50 memberi kontras lembut antara background dan card putih */}
+      <SidebarInset className="flex flex-col bg-slate-50">
+        {/* Header di atas konten */}
+        <DashboardHeader />
 
-          {/* Page Content */}
-          <main className="flex-1 overflow-y-auto bg-gray-50">
-            <div className="p-6">
-              {children}
-            </div>
-          </main>
-        </div>
-      </div>
+        {/* Konten halaman */}
+        <main className="flex-1 overflow-y-auto">
+          <div className="mx-auto flex max-w-6xl flex-col gap-6 p-4 md:p-6">
+            {children}
+          </div>
+        </main>
+      </SidebarInset>
     </SidebarProvider>
   )
 }

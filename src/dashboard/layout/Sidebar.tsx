@@ -9,6 +9,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import SidebarWorkspaceHeader from "./Sidebar/SidebarHeader/SidebarHeader"
+import DashboardSidebarFooter from "./Sidebar/SidebarHeader/SidebarFooter"
 
 /**
  * DashboardSidebar Component
@@ -56,31 +58,23 @@ export default function DashboardSidebar({
   onPageChange,
 }: DashboardSidebarProps) {
   return (
-    <Sidebar className="border-r">
-      <SidebarContent>
-        {/* Logo / Branding */}
-        <div className="mb-6 px-4 py-4">
-          <h2 className="text-xl font-bold text-blue-600">Admin</h2>
-        </div>
+    <Sidebar variant="inset" collapsible="icon" className="border-r">
+      {/* Header (workspace selector / branding) */}
+      <SidebarWorkspaceHeader />
 
-        {/* Navigation Menu */}
+      {/* Menu utama */}
+      <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="px-2 text-xs font-semibold uppercase tracking-wider text-gray-500">
-            Menu
-          </SidebarGroupLabel>
+          <SidebarGroupLabel>Main</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.id}>
                   <SidebarMenuButton
+                    isActive={currentPage === item.id}
                     onClick={() => onPageChange?.(item.id)}
-                    className={`cursor-pointer ${
-                      currentPage === item.id
-                        ? "bg-blue-100 text-blue-600"
-                        : "hover:bg-gray-100"
-                    }`}
                   >
-                    <item.icon className="h-5 w-5" />
+                    <item.icon />
                     <span>{item.title}</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -89,6 +83,7 @@ export default function DashboardSidebar({
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <DashboardSidebarFooter />
     </Sidebar>
   )
 }

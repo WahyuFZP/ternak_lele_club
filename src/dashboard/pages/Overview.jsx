@@ -8,16 +8,19 @@ import StatsCard from "@/dashboard/components/StatsCard"
  */
 export default function OverviewPage() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-6">Dashboard Overview</h1>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-xl font-semibold tracking-tight text-slate-900">Dashboard overview</h1>
+        <p className="mt-1 text-sm text-slate-500">Ringkasan singkat performa aplikasi Anda hari ini.</p>
+      </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
         <StatsCard
           title="Total Users"
           value="1,234"
           icon={<Users className="h-6 w-6" />}
-          color="blue"
+          color="indigo"
         />
         <StatsCard
           title="Total Products"
@@ -29,7 +32,7 @@ export default function OverviewPage() {
           title="Revenue"
           value="$45,231"
           icon={<TrendingUp className="h-6 w-6" />}
-          color="purple"
+          color="indigo"
         />
         <StatsCard
           title="Orders"

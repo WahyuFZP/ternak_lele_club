@@ -26,16 +26,18 @@ export default function ProductCard({
   onDelete,
 }: ProductCardProps) {
   return (
-    <div className="rounded-lg border bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
+    <div className="rounded-xl border border-slate-200 bg-white/90 p-4 shadow-sm hover:shadow-md transition-shadow">
       {/* Product Image Placeholder */}
-      <div className="mb-4 h-40 rounded-lg bg-gray-100 flex items-center justify-center">
-        <span className="text-gray-400">No Image</span>
+      <div className="mb-4 flex h-40 items-center justify-center rounded-lg bg-slate-100">
+        <span className="text-sm text-slate-400">No image</span>
       </div>
 
       {/* Product Info */}
-      <h3 className="font-semibold text-gray-900">{product.name}</h3>
-      <p className="mt-2 text-sm text-gray-600">Price: ${product.price}</p>
-      <p className="text-sm text-gray-600">Stock: {product.stock}</p>
+      <h3 className="text-sm font-semibold text-slate-900">{product.name}</h3>
+      <p className="mt-2 text-sm text-slate-700">
+        Price: <span className="font-medium">${product.price}</span>
+      </p>
+      <p className="text-sm text-slate-700">Stock: {product.stock}</p>
 
       {/* Actions */}
       <div className="mt-4 flex gap-2">

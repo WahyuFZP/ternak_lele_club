@@ -1,61 +1,89 @@
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
+
 /**
  * Settings Page
- * 
+ *
  * Halaman untuk user manage settings
  */
 export default function SettingsPage() {
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-6">Settings</h1>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-xl font-semibold tracking-tight text-slate-900">
+          Settings
+        </h1>
+        <p className="mt-1 text-sm text-slate-500">
+          Kelola pengaturan akun dan preferensi aplikasi Anda.
+        </p>
+      </div>
 
       {/* Settings Sections */}
-      <div className="space-y-6">
+      <div className="grid gap-6 md:grid-cols-2">
         {/* Account Settings */}
-        <div className="rounded-lg border bg-white p-6">
-          <h2 className="text-xl font-semibold mb-4">Account Settings</h2>
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Email
-              </label>
-              <input
+        <section className="space-y-4 rounded-xl border border-slate-200 bg-white/90 p-6">
+          <div>
+            <h2 className="text-sm font-semibold text-slate-900">
+              Account
+            </h2>
+            <p className="mt-1 text-xs text-slate-500">
+              Perbarui informasi dasar akun Anda.
+            </p>
+          </div>
+          <div className="space-y-3">
+            <div className="space-y-1.5">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
                 type="email"
-                placeholder="your@email.com"
-                className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="you@example.com"
               />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Full Name
-              </label>
-              <input
+            <div className="space-y-1.5">
+              <Label htmlFor="name">Full name</Label>
+              <Input
+                id="name"
                 type="text"
-                placeholder="Your Name"
-                className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Your name"
               />
             </div>
           </div>
-        </div>
+        </section>
 
         {/* Privacy Settings */}
-        <div className="rounded-lg border bg-white p-6">
-          <h2 className="text-xl font-semibold mb-4">Privacy Settings</h2>
+        <section className="space-y-4 rounded-xl border border-slate-200 bg-white/90 p-6">
+          <div>
+            <h2 className="text-sm font-semibold text-slate-900">
+              Privacy
+            </h2>
+            <p className="mt-1 text-xs text-slate-500">
+              Kontrol bagaimana akun Anda muncul ke orang lain.
+            </p>
+          </div>
           <div className="space-y-3">
-            <label className="flex items-center gap-3 cursor-pointer">
-              <input type="checkbox" className="w-4 h-4" defaultChecked />
-              <span className="text-sm text-gray-700">Receive email notifications</span>
+            <label className="flex items-center gap-3 text-sm text-slate-700">
+              <input
+                type="checkbox"
+                className="h-4 w-4 rounded border-slate-300 text-violet-600 focus:ring-violet-500"
+                defaultChecked
+              />
+              Receive email notifications
             </label>
-            <label className="flex items-center gap-3 cursor-pointer">
-              <input type="checkbox" className="w-4 h-4" />
-              <span className="text-sm text-gray-700">Show profile to public</span>
+            <label className="flex items-center gap-3 text-sm text-slate-700">
+              <input
+                type="checkbox"
+                className="h-4 w-4 rounded border-slate-300 text-violet-600 focus:ring-violet-500"
+              />
+              Show profile to public
             </label>
           </div>
-        </div>
+        </section>
+      </div>
 
-        {/* Save Button */}
-        <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 font-medium">
-          Save Changes
-        </button>
+      {/* Save Button */}
+      <div className="flex justify-end">
+        <Button size="sm">Save changes</Button>
       </div>
     </div>
   )

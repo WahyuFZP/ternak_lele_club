@@ -1,5 +1,7 @@
 import { useState } from "react"
 import UserTable from "@/dashboard/components/UserTable"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 /**
  * Users Page
@@ -42,12 +44,33 @@ export default function UsersPage() {
   }
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-3xl font-bold">Users Management</h1>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 font-medium">
-          + Add User
-        </button>
+    <div className="space-y-6">
+      {/* Header & actions */}
+      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <div>
+          <h1 className="text-xl font-semibold tracking-tight text-slate-900">
+            Users
+          </h1>
+          <p className="mt-1 text-sm text-slate-500">
+            Kelola akun pengguna yang terdaftar di aplikasi.
+          </p>
+        </div>
+        <Button size="sm" className="mt-1">
+          + Add user
+        </Button>
+      </div>
+
+      {/* Filter & search */}
+      <div className="flex flex-col gap-3 rounded-xl border border-slate-200 bg-white/80 p-3 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-1 items-center gap-2">
+          <Input
+            placeholder="Search users..."
+            className="max-w-xs bg-transparent"
+          />
+        </div>
+        <p className="text-xs text-slate-500">
+          Menampilkan {users.length} pengguna
+        </p>
       </div>
 
       {/* Users Table */}

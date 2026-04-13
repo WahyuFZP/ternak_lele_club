@@ -1,6 +1,8 @@
+import { Badge } from "@/components/ui/badge"
+
 /**
  * UserTable Component
- * 
+ *
  * Tabel untuk menampilkan list users dengan actions (edit, delete)
  */
 
@@ -48,55 +50,55 @@ export default function UserTable({
   onDelete,
 }: UserTableProps) {
   return (
-    <div className="rounded-lg border bg-white overflow-hidden shadow-sm">
+    <div className="overflow-hidden rounded-xl border border-slate-200 bg-white/90 shadow-sm">
       <table className="w-full">
-        <thead className="border-b bg-gray-50">
+        <thead className="border-b bg-slate-50/80">
           <tr>
-            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+            <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
               Name
             </th>
-            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+            <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
               Email
             </th>
-            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+            <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
               Status
             </th>
-            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+            <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
               Join Date
             </th>
-            <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+            <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
               Actions
             </th>
           </tr>
         </thead>
         <tbody>
           {users.map((user) => (
-            <tr key={user.id} className="border-b hover:bg-gray-50 transition-colors">
-              <td className="px-6 py-4 text-sm text-gray-900">{user.name}</td>
-              <td className="px-6 py-4 text-sm text-gray-600">{user.email}</td>
-              <td className="px-6 py-4 text-sm">
-                <span
-                  className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${
-                    user.status === "active"
-                      ? "bg-green-100 text-green-800"
-                      : "bg-gray-100 text-gray-800"
-                  }`}
+            <tr
+              key={user.id}
+              className="border-b last:border-b-0 hover:bg-slate-50 transition-colors"
+            >
+              <td className="px-6 py-3 text-sm text-slate-900">{user.name}</td>
+              <td className="px-6 py-3 text-sm text-slate-600">{user.email}</td>
+              <td className="px-6 py-3 text-sm">
+                <Badge
+                  variant={user.status === "active" ? "secondary" : "outline"}
+                  className="capitalize"
                 >
                   {user.status}
-                </span>
+                </Badge>
               </td>
-              <td className="px-6 py-4 text-sm text-gray-600">{user.joinDate}</td>
-              <td className="px-6 py-4 text-sm">
+              <td className="px-6 py-3 text-sm text-slate-600">{user.joinDate}</td>
+              <td className="px-6 py-3 text-sm">
                 <div className="flex gap-2">
                   <button
                     onClick={() => onEdit?.(user)}
-                    className="text-blue-600 hover:underline text-xs font-medium"
+                    className="text-xs font-medium text-violet-600 hover:underline"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => onDelete?.(user.id)}
-                    className="text-red-600 hover:underline text-xs font-medium"
+                    className="text-xs font-medium text-rose-600 hover:underline"
                   >
                     Delete
                   </button>

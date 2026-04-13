@@ -87,7 +87,7 @@ export default function UserTable({
                   {user.status}
                 </Badge>
               </td>
-              <td className="px-6 py-3 text-sm text-slate-600">{user.joinDate}</td>
+              <td className="px-6 py-3 text-sm text-slate-600">{user.joinDate} </td>
               <td className="px-6 py-3 text-sm">
                 <div className="flex gap-2">
                   <button

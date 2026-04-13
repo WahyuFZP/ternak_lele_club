@@ -31,7 +31,13 @@ const fetchUsers = async () => {
   try {
     const result = await getAllUsers()
     if(result.success) {
-      setUsers(result.data)
+      const formattedData = result.data.map((u) => ({
+        ...u,
+        joinDate: u.created_at
+        ? new Date(u.created_at).toLocaleDateString("id-ID")
+        : "-",
+      }))
+      setUsers(formattedData)
     } else {
       setFetchError(result.error)
     }

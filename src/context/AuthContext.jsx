@@ -53,8 +53,33 @@ export function AuthProvider({ children }) {
     // TODO: Clear localStorage/sessionStorage
   }
 
+  // Fetch Users
+  const getAllUsers = async () => {
+    try {
+      const { data, error } = await supabase.from("users").select("*")
+      if(error) throw error
+      return { success: true, data }
+    } catch (err) {
+      return { success: false, error: err.message }
+    }
+  }
+
+  // User Create
+  const createUser = async (email , password) => {
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+      })
+      if (error) throw error
+      return { success: true, data }
+    } catch (err) {
+      return { success: false, error: err }
+    }
+  }
+
   return (
-    <AuthContext.Provider value={{ user, isLoggedIn, loading, login, logout, checkAuth }}>
+    <AuthContext.Provider value={{ user, isLoggedIn, loading, login, logout, checkAuth, createUser, getAllUsers }}>
       {children}
     </AuthContext.Provider>
   )

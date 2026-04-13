@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import UserTable from "@/dashboard/components/UserTable"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { useAuth } from "@/context/AuthContext"
 
 /**
  * Users Page
@@ -9,29 +10,56 @@ import { Input } from "@/components/ui/input"
  * CRUD untuk management users
  */
 export default function UsersPage() {
-  const [users, setUsers] = useState([
-    {
-      id: "1",
-      name: "John Doe",
-      email: "john@example.com",
-      status: "active",
-      joinDate: "2024-01-15",
-    },
-    {
-      id: "2",
-      name: "Jane Smith",
-      email: "jane@example.com",
-      status: "active",
-      joinDate: "2024-02-20",
-    },
-    {
-      id: "3",
-      name: "Bob Johnson",
-      email: "bob@example.com",
-      status: "inactive",
-      joinDate: "2024-03-10",
-    },
-  ])
+  const { createUser, getAllUsers } = useAuth()
+
+ 
+ 
+// State Modal
+ const [users, setUsers] = useState([])
+const [isFetching, setIsFetching ] = useState(false)
+const [fetchError, setFetchError ] = useState("")
+
+const [showModal, setShowModal ] = useState(false)
+const [formData, setFormData ] = useState({ name: "", email: "", password: "" })
+const [isLoading, setIsLoading ] = useState(false)
+const [error, setError ] = useState("")
+
+
+const fetchUsers = async () => {
+  setIsFetching(true)
+  setFetchError("")
+  try {
+    const result = await getAllUsers()
+    if(result.success) {
+      setUsers(result.data)
+    } else {
+      setFetchError(result.error)
+    }
+    } finally {
+    setIsFetching(false)
+  }
+}
+// Fetch users on mount
+useEffect(() => {
+    fetchUsers()
+  }, [])
+
+  const handleCreate = async () => {
+   setIsLoading(true)
+   setError("")
+
+   const result = await createUser(formData.email, formData.password, {
+    name: formData.name,
+   })
+   if(result.success) {
+    await fetchUsers()
+    setShowModal(false)
+    setFormData({ name: "", email: "", password: "" })
+   } else {
+    setError(result.error)
+   }
+    setIsLoading(false)
+  }
 
   const handleEdit = (user) => {
     console.log("Edit user:", user)
@@ -55,7 +83,7 @@ export default function UsersPage() {
             Kelola akun pengguna yang terdaftar di aplikasi.
           </p>
         </div>
-        <Button size="sm" className="mt-1">
+        <Button size="sm" className="mt-1" onClick={() => setShowModal(true)}>
           + Add user
         </Button>
       </div>
@@ -73,8 +101,65 @@ export default function UsersPage() {
         </p>
       </div>
 
-      {/* Users Table */}
-      <UserTable users={users} onEdit={handleEdit} onDelete={handleDelete} />
+
+      {/* Fetch AllUsers */}
+     {isFetching ? (
+        <div className="py-10 text-center text-sm text-slate-400">
+          Memuat data pengguna...
+        </div>
+      ) : fetchError ? (
+        <div className="py-10 text-center text-sm text-red-500">
+          {fetchError}
+          <button onClick={fetchUsers} className="ml-2 underline">
+            Coba lagi
+          </button>
+        </div>
+      ) : (
+        <UserTable users={users} onEdit={handleEdit} onDelete={handleDelete} />
+      )}
+
+      {/* Modal Create User */}
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-lg space-y-4">
+            <h2 className="text-lg font-semibold">Tambah User Baru</h2>
+
+            {error && (
+              <p className="text-sm text-red-500 bg-red-50 p-2 rounded">{error}</p>
+            )}
+
+            <Input
+              placeholder="Nama lengkap"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            />
+            <Input
+              placeholder="Email"
+              type="email"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            />
+            <Input
+              placeholder="Password"
+              type="password"
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+            />
+
+            <div className="flex justify-end gap-2 pt-2">
+              <Button variant="outline" onClick={() => setShowModal(false)}>
+                Batal
+              </Button>
+              <Button onClick={handleCreate} disabled={isLoading}>
+                {isLoading ? "Menyimpan..." : "Simpan"}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
+
+      
+      
   )
 }

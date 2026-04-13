@@ -20,7 +20,7 @@ export default function OverviewPage() {
           title="Total Users"
           value="1,234"
           icon={<Users className="h-6 w-6" />}
-          color="indigo"
+          color="accent"
         />
         <StatsCard
           title="Total Products"
@@ -32,7 +32,7 @@ export default function OverviewPage() {
           title="Revenue"
           value="$45,231"
           icon={<TrendingUp className="h-6 w-6" />}
-          color="indigo"
+          color="accent"
         />
         <StatsCard
           title="Orders"
@@ -43,13 +43,13 @@ export default function OverviewPage() {
       </div>
 
       {/* Recent Activity */}
-      <div className="rounded-lg border bg-white p-6">
-        <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
+      <div className="rounded-xl border border-slate-200 bg-white/90 p-6">
+        <h2 className="mb-4 text-lg font-semibold text-slate-900">Recent activity</h2>
         <div className="space-y-3">
           <div className="flex items-center justify-between py-3 border-b last:border-b-0">
             <div>
-              <p className="text-sm font-medium text-gray-900">New user registered</p>
-              <p className="text-xs text-gray-600">2 hours ago</p>
+              <p className="text-sm font-medium text-slate-900">New user registered</p>
+              <p className="text-xs text-slate-500">2 hours ago</p>
             </div>
             <span className="inline-flex rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-800">
               New
@@ -57,8 +57,8 @@ export default function OverviewPage() {
           </div>
           <div className="flex items-center justify-between py-3 border-b last:border-b-0">
             <div>
-              <p className="text-sm font-medium text-gray-900">Order #1202 completed</p>
-              <p className="text-xs text-gray-600">4 hours ago</p>
+              <p className="text-sm font-medium text-slate-900">Order #1202 completed</p>
+              <p className="text-xs text-slate-500">4 hours ago</p>
             </div>
             <span className="inline-flex rounded-full bg-blue-100 px-2 py-1 text-xs font-semibold text-blue-800">
               Completed

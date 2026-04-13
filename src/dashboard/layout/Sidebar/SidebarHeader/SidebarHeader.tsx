@@ -16,22 +16,20 @@ import {
 export default function SidebarWorkspaceHeader() {
   return (
     <SidebarHeader>
+         {/* Logo / branding di atas */}
+      <div className="mb-2 flex items-center gap-2 px-2">
+        {/* Bisa pakai img, icon, atau div warna */}
+        <img
+          src={"src/assets/lele.png"}
+          alt="Landing Auth"
+          className="h-7 w-7 rounded-md"
+        />
+        <span className="text-sm font-semibold tracking-tight text-slate-900">
+          Dashboard Lele Club
+        </span>
+      </div>
       <SidebarMenu>
-        <SidebarMenuItem>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <SidebarMenuButton>
-                Select Workspace
-                <ChevronDown className="ml-auto" />
-              </SidebarMenuButton>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-[--radix-popper-anchor-width]">
-              <DropdownMenuItem>
-                <span>Acme Inc</span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </SidebarMenuItem>
+        
       </SidebarMenu>
     </SidebarHeader>
   )

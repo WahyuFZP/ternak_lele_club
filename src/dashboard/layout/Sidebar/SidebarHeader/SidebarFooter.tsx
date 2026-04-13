@@ -28,7 +28,7 @@ export default function DashboardSidebarFooter() {
             onClick={handleLogout}
           >
             <div className="flex min-w-0 items-center gap-2">
-              <div className="h-8 w-8 shrink-0 rounded-full bg-indigo-500" />
+              <div className="h-8 w-8 shrink-0 rounded-full bg-violet-500" />
               <div className="flex min-w-0 flex-col text-left">
                 <span className="max-w-40 truncate text-sm font-medium">
                   {user?.email || "Logged in"}

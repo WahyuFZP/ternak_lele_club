@@ -37,7 +37,7 @@ export default function DashboardLayout({
       {/* bg-slate-50 memberi kontras lembut antara background dan card putih */}
       <SidebarInset className="flex flex-col bg-slate-50">
         {/* Header di atas konten */}
-        <DashboardHeader />
+        <DashboardHeader currentPage={currentPage} />
 
         {/* Konten halaman */}
         <main className="flex-1 overflow-y-auto">

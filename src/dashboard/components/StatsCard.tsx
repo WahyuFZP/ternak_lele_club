@@ -8,11 +8,11 @@ interface StatsCardProps {
   title: string
   value: string | number
   icon?: React.ReactNode
-  color?: "indigo" | "green" | "red"
+  color?: "accent" | "green" | "red"
 }
 
 const colorStyles = {
-  indigo: "bg-indigo-50 text-indigo-600",
+  accent: "bg-violet-50 text-violet-600",
   green: "bg-emerald-50 text-emerald-600",
   red: "bg-rose-50 text-rose-600",
 }
@@ -21,10 +21,10 @@ export default function StatsCard({
   title,
   value,
   icon,
-  color = "indigo",
+  color = "accent",
 }: StatsCardProps) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md transition-shadow">
+    <div className="rounded-xl border border-slate-200 bg-white/90 p-5 shadow-sm hover:shadow-md transition-shadow">
       <div className="flex items-start justify-between">
         <div>
           <p className="text-xs font-medium uppercase tracking-wide text-slate-500">{title}</p>

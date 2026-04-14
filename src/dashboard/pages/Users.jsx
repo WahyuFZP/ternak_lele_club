@@ -10,7 +10,7 @@ import { useAuth } from "@/context/AuthContext"
  * CRUD untuk management users
  */
 export default function UsersPage() {
-  const { createUser, getAllUsers } = useAuth()
+  const { createUser, getAllUsers, deleteUser } = useAuth()
 
  
  
@@ -72,9 +72,16 @@ useEffect(() => {
     // TODO: Open edit modal
   }
 
-  const handleDelete = (userId) => {
-    setUsers(users.filter((u) => u.id !== userId))
-    console.log("Delete user:", userId)
+  const handleDelete = async (userId) => {
+  const confirmed = window.confirm("Apakah Anda yakin ingin menghapus pengguna ini?")
+  if(!confirmed) return 
+
+  const result = await deleteUser(userId) 
+    if(result.success) {
+      await fetchUsers()
+    } else {
+      alert("Gagal menghapus pengguna: " + result.error)
+    }
   }
 
   return (
